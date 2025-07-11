@@ -11,6 +11,7 @@ import { GradientPreview } from '@/components/GradientPreview';
 import { ColorStopControl } from '@/components/ColorStopControl';
 import { DirectionControls } from '@/components/DirectionControls';
 import { CssOutput } from '@/components/CssOutput';
+import { TailwindOutput } from './components/TailwindOutput';
 import { SavedGradients } from '@/components/SavedGradients';
 import { ThemeSelector } from '@/components/ThemeSelector';
 import { Tutorial } from '@/components/Tutorial';
@@ -42,6 +43,27 @@ function App() {
   const { toast } = useToast();
 
   const gradientCss = generateCss();
+
+  const generateTailwind = () => {
+  const directionMap: Record<string, string> = {
+    'to top': 'bg-gradient-to-t',
+    'to bottom': 'bg-gradient-to-b',
+    'to left': 'bg-gradient-to-l',
+    'to right': 'bg-gradient-to-r',
+    'to top left': 'bg-gradient-to-tl',
+    'to top right': 'bg-gradient-to-tr',
+    'to bottom left': 'bg-gradient-to-bl',
+    'to bottom right': 'bg-gradient-to-br',
+  };
+
+  const directionClass = directionMap[direction] || 'bg-gradient-to-r';
+  const fromColor = colorStops[0]?.color.replace(/\s+/g, '') || '#000000';
+  const toColor = colorStops[colorStops.length - 1]?.color.replace(/\s+/g, '') || '#ffffff';
+
+  return `${directionClass} from-[${fromColor}] to-[${toColor}]`;
+};
+
+const gradientTailwind = generateTailwind();
 
   const handleSaveGradient = (name: string) => {
     const newGradient: GradientConfig = {
@@ -270,6 +292,7 @@ function App() {
               </Tabs>
 
               <CssOutput gradientCss={gradientCss} />
+              <TailwindOutput gradientTailwind={gradientTailwind}/>
             </motion.div>
           </div>
         </div>
