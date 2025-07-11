@@ -13,7 +13,6 @@ export function useTheme() {
   }, []);
 
   useEffect(() => {
-    // Apply theme to CSS variables
     const root = document.documentElement;
     root.style.setProperty('--theme-primary', currentTheme.colors.primary);
     root.style.setProperty('--theme-secondary', currentTheme.colors.secondary);
@@ -22,16 +21,13 @@ export function useTheme() {
     root.style.setProperty('--theme-surface', currentTheme.colors.surface);
     root.style.setProperty('--theme-text', currentTheme.colors.text);
     root.style.setProperty('--theme-muted', currentTheme.colors.muted);
-    
-    // Apply gradients
     root.style.setProperty('--theme-gradient-hero', currentTheme.gradients.hero);
     root.style.setProperty('--theme-gradient-card', currentTheme.gradients.card);
     root.style.setProperty('--theme-gradient-button', currentTheme.gradients.button);
 
-    // Set dark class based on theme
     const isDark = currentTheme.id !== 'neko-light';
     document.documentElement.classList.toggle('dark', isDark);
-    
+
     localStorage.setItem('neko-theme', currentTheme.id);
   }, [currentTheme]);
 
@@ -42,9 +38,20 @@ export function useTheme() {
     }
   };
 
+  // ✅ ADD THIS FUNCTION
+  const toggleTheme = () => {
+    const nextTheme = currentTheme.id === 'neko-light'
+      ? themes.find(t => t.id === 'neko-dark') 
+      : themes.find(t => t.id === 'neko-light');
+    if (nextTheme) {
+      setCurrentTheme(nextTheme);
+    }
+  };
+
   return { 
     currentTheme, 
     setTheme, 
+    toggleTheme,  
     themes,
     isDark: currentTheme.id !== 'neko-light'
   };
