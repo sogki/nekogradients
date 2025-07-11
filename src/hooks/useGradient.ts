@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import { ColorStop, GradientConfig } from '@/types/gradient';
 import chroma from 'chroma-js';
 

@@ -62,7 +62,7 @@ export function Tutorial() {
   const handleJoyrideCallback = (data: CallBackProps) => {
     const { status } = data;
     
-    if ([STATUS.FINISHED, STATUS.SKIPPED].includes(status)) {
+    if (status === STATUS.FINISHED || status === STATUS.SKIPPED) {
       setRunTour(false);
       setHasSeenTutorial(true);
       localStorage.setItem('neko-tutorial-seen', 'true');
