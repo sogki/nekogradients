@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { GradientPreview } from './GradientPreview';
-import { Save, Trash2, Heart, Download, Share } from 'lucide-react';
+import { Save, Trash2, Heart, Share } from 'lucide-react';
 import { GradientConfig } from '@/types/gradient';
 import { useToast } from '@/hooks/use-toast';
 
